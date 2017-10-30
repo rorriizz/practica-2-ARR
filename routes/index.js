@@ -40,6 +40,10 @@ router.route('/autores/:id')
 	.delete(LibrosCtrl.deleteAutor);//eliminar libros del autor
 	//utilizar git, crear una cuenta en github y subir tarea ; no subir los node_modules y hacer un README.md
 
+router.route('/autores/:id/libros')
+	.get(LibrosCtrl.getLibrosByAutor);
+
+
 module.exports = router;
 
 
