@@ -242,3 +242,22 @@ exports.deleteAutor = function(req,res,next){
 		}
 	});
 };
+//GET /autores/:id/libros
+exports.getLibrosByAutor=function(req,res,next){
+	console.log('GET/autores/:id/libros');
+	console.log(req.params.id);
+	Autor.findById({_id: req.params.id},function(err,libros){//WHERE: Libro.find({autor:'Dan Brown'},function(err,libros){  		
+		if(err){
+			res.send(500, err.message);
+		}else{
+			Libro.find({autor:req.params.id}, function (err, libro) {
+				if(err){
+					res.send(500, err.message);
+				}else{
+					Autor.libros=libro;
+					return res.status(200).jsonp(libro);
+				}
+			});
+		}
+	});
+};
